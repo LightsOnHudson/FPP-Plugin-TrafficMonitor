@@ -13,7 +13,14 @@ function isCaptureRunning() {
 	
 	$OUTPUT_COUNT = count($OUTPUT_ARRAY);
 	
-	echo "OUTPUT COUNT: ".$OUTPUT_COUNT;
+	echo "OUTPUT COUNT: ".$OUTPUT_COUNT. " ";
+	
+	if($DEBUG) {
+		foreach ($OUTPUT_ARRAY as $pid) {
+			logEntry("output pid: ".$pid);
+			
+		}
+	}
 	
 	
 }
