@@ -1,3 +1,4 @@
+<?php
 function getUniqueVisits() {
 
 global $DB_NAME, $DEBUG;
@@ -23,3 +24,4 @@ global $DB_NAME, $DEBUG;
 		}
 					
 					
+?>
