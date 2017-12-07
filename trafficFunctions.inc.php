@@ -11,7 +11,7 @@ function isCaptureRunning() {
 	//array of items back separate by \n
 	$OUTPUT_ARRAY = explode("\n",$output);
 	
-	$OUTPUT_COUNT = count($OUTPUT_ARRAY);
+	$OUTPUT_COUNT = count($OUTPUT_ARRAY)-1;
 	
 	echo "OUTPUT COUNT: ".$OUTPUT_COUNT. " ";
 	
