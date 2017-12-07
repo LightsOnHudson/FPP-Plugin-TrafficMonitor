@@ -1,4 +1,22 @@
 <?php
+
+function isCaptureRunning() {
+	
+	global $DB_NAME, $DEBUG, $CAPTURE_TO_DB_CMD;
+	
+	$CMD = "/usr/bin/pgrep -fl ".$CAPTURE_TO_DB_CMD;
+	
+	$output = shell_exec($CMD);
+	
+	//array of items back separate by \n
+	$OUTPUT_ARRAY = explode("\n",$output);
+	
+	$OUTPUT_COUNT = count($OUTPUT_ARRAY);
+	
+	echo "OUTPUT COUNT: ".$OUTPUT_COUNT;
+	
+	
+}
 function showMACWhitelist() {
 
 global $DB_NAME, $DEBUG;

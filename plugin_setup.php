@@ -9,6 +9,9 @@ include_once "trafficFunctions.inc.php";
 $pluginName = "TrafficMonitor";
 $pluginVersion ="1.0";
 
+
+$CAPTURE_TO_DB_CMD = "captureToDBWLAN0.py";
+
 $DB_NAME = "/home/fpp/media/plugindata/visitorTracker.db";
 
 $logFile = $settings['logDirectory']."/".$pluginName.".log";
@@ -73,6 +76,9 @@ if (file_exists($pluginConfigFile))
 </ul>
 
 <?
+
+echo "Is output running: count: ".isCaptureRunning();
+echo "<p/> \n";
 //show the mac whitlist
 showMACWhitelist();
 
