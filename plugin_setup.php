@@ -62,6 +62,8 @@ switch($CAPTURE_CMD) {
 		//array of items back separate by \n
 		$OUTPUT_ARRAY = explode("\n",$output);
 		
+		logEntry("output array cound: ".count($OUTPUT_ARRAY));
+		
 		//there is a rogue sh command and an empty that strip off
 		//so if it is > 0 then we have it running!
 		
