@@ -33,12 +33,21 @@ if(isset($_POST['submit']))
 {
 	
 	
-	//WriteSettingToFile("OVERLAY_MODE",urlencode($_POST["OVERLAY_MODE"]),$pluginName);
+	//WriteSettingToFile("DEBUG",urlencode($_POST["DEBUG"]),$pluginName);
 }
 
 
+WriteSettingToFile("DEBUG",urlencode("true"),$pluginName);
+WriteSettingToFile("DB_NAME",urlencode($DB_NAME),$pluginName);
+sleep(1);
+
+$pluginConfigFile = $settings['configDirectory'] . "/plugin." .$pluginName;
+if (file_exists($pluginConfigFile))
+	$pluginSettings = parse_ini_file($pluginConfigFile);
 	
+	$DEBUG = urldecode($pluginSettings['DEBUG']);
 	
+	$DB_NAME = urldecode($pluginSettings['DB_NAME']);
 //	$PLUGINS = urldecode(ReadSettingFromFile("PLUGINS",$pluginName));
 //$PLUGINS = $pluginSettings['PLUGINS'];
 
