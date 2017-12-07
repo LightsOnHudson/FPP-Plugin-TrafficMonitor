@@ -138,7 +138,7 @@ switch($CAPTURE_CMD) {
 
 
 
-WriteSettingToFile("DEBUG",urlencode("true"),$pluginName);
+//WriteSettingToFile("DEBUG",urlencode("true"),$pluginName);
 WriteSettingToFile("DB_NAME",urlencode($DB_NAME),$pluginName);
 sleep(1);
 
