@@ -227,8 +227,12 @@ echo "<p/> \n";
 ?>
 <p>To report a bug, please file it against <?php echo $gitURL;?>
 </form>
+<?
+echo "DEBUG: ";
 
 
+PrintSettingCheckbox("DEBUG", "DEBUG", $restart = 0, $reboot = 0, "ON", "OFF", $pluginName = $pluginName, $callbackName = "");
+?>
 
 </fieldset>
 </div>
