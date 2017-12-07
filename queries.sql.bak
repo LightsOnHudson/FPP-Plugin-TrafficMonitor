@@ -1,0 +1,118 @@
+WiFi Visitor Traffic monitor queries
+
+sqlite3 /home/fpp/media/plugindata/visitorTracker.db 
+.mode column
+.headers on
+SELECT count(*) FROM Visit;
+SELECT count(*) FROM MACWhitelist;
+
+######################################
+# clean up old visit logs
+DELETE FROM Visit;
+VACUUM;
+
+# View, Count, Delete all visits less than one minute long
+SELECT * FROM Visit
+	WHERE Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) = 0;
+SELECT COUNT(Id) FROM Visit
+	WHERE Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) = 0;
+
+DELETE FROM Visit
+	WHERE Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) = 0;
+
+# Delete Visits from Whitelisted MAC addresses
+DELETE FROM Visit
+	WHERE MAC IN (SELECT MAC FROM MACWhitelist);
+
+
+# Get possible list of MACs that are drive-bys seen for a minute or less
+SELECT DISTINCT MAC, 'drive-by?'
+	FROM Visit
+	WHERE MAC NOT IN (SELECT MAC FROM MACWhitelist)
+		AND Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) = 0;
+
+# Get list of possible neighbors or in-house MACs seen for a long time (used when show not running)
+SELECT DISTINCT MAC, 'neighbor?', Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1 as Mins
+	FROM Visit
+	WHERE MAC NOT IN (SELECT MAC FROM MACWhitelist)
+		AND Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1;
+
+# Auto whitelist any one who sat around for more than a minute before the show even started
+INSERT INTO MACWhitelist
+	SELECT DISTINCT MAC, 'neighbor?'
+		FROM Visit
+		WHERE MAC NOT IN (SELECT MAC FROM MACWhitelist)
+			AND Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1;
+
+# View Shitelisted MACs
+SELECT MAC FROM MACWhitelist;
+
+######################################
+# Processing data
+######
+# Delete any Visits of less than one minute
+DELETE FROM Visit
+	WHERE Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) = 0;
+
+# Delete any visitors who showed up 3 or more times, probably not watching the show
+DELETE FROM Visit
+	WHERE MAC IN (
+		SELECT MAC
+			FROM Visit
+			GROUP BY MAC
+			HAVING COUNT(MAC) >= 3);
+
+# Whitelist and DELETE anyone around for more than 30 minutes ever, show is nowhere near that long
+INSERT INTO MACWhitelist
+	SELECT MAC, 'neighbor?'
+		FROM Visit
+		WHERE Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1 >= 30
+		ORDER BY MAC, FirstSeen;
+DELETE FROM Visit
+	WHERE Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1 >= 30;
+
+#############################
+# All Visitors in the last few hours
+SELECT FirstSeen, LastSeen, MAC, Pings,
+		Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1 AS Mins, 1.0 * Pings / (Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1) AS PingsPerMin
+	FROM Visit
+	WHERE firstSeen >= Datetime('now', '-240 minutes', 'localtime')
+		AND Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1
+	ORDER BY LastSeen;
+
+
+SELECT FirstSeen, LastSeen, MAC, Pings, Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1 AS Mins, 1.0 * Pings / (Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1) AS PingsPerMin FROM Visit WHERE firstSeen >= Datetime('now', '-240 minutes', 'localtime') AND Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1 ORDER BY LastSeen;
+#############################
+
+# All visitors
+SELECT FirstSeen, LastSeen,1:19:06:4b:3d MAC, Pings,
+		Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1 AS Mins, 1.0 * Pings / (Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1) AS PingsPerMin
+	FROM Visit
+	WHERE Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1
+	ORDER BY LastSeen;
+
+#Partial MACs of all Visitors
+SELECT FirstSeen, LastSeen, substr(MAC, 7, 11) as PartialMAC,
+		Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1 AS Mins
+	FROM Visit
+	WHERE Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1
+	ORDER BY FirstSeen;
+
+SELECT FirstSeen, LastSeen, MAC, Pings,
+		Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1 AS Mins, 1.0 * Pings / (Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1) AS PingsPerMin
+	FROM Visit WHERE LastSeen >= '2017-12-02 16:30:00'
+                 AND LastSeen <= '2017-12-02 22:10:00'
+				 AND Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1;
+
+SELECT COUNT(DISTINCT(MAC))
+	FROM Visit WHERE LastSeen >= '2017-12-02 16:30:00'
+                 AND LastSeen <= '2017-12-02 22:10:00'
+				 AND Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1;
+
+SELECT MAC, Count(*)
+	FROM Visit WHERE LastSeen >= '2017-12-02 16:30:00'
+                 AND LastSeen <= '2017-12-02 22:10:00'
+	GROUP BY MAC
+	ORDER BY Count(*);
+
+
