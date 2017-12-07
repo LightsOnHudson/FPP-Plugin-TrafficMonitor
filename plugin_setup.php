@@ -75,12 +75,15 @@ switch($CAPTURE_CMD) {
 				$PID_TO_KILL = $PID_PARTS[0];
 				
 				//cmd to kill
-				$CMD_TO_KILL = "/usr/bin/sudo /usr/bin/pkill ".$PID_TO_KILL;
+				$CMD_TO_KILL = "/usr/bin/sudo /usr/bin/kill -9 ".$PID_TO_KILL;
 				
 				
 				if($DEBUG) {
 					logEntry(" Killing PID: ".$PID_TO_KILL);
+					logEntry("kill cmd: ".$CMD_TO_KILL);
+					
 				}
+				
 				
 				exec($CMD_TO_KILL);
 			}
