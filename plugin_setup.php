@@ -91,7 +91,9 @@ if (file_exists($pluginConfigFile))
 //	$PLUGINS = urldecode(ReadSettingFromFile("PLUGINS",$pluginName));
 //$PLUGINS = $pluginSettings['PLUGINS'];
 
-	
+	if($DEBUG) {
+		print_r($_POST);
+	}
 
 ?>
 
