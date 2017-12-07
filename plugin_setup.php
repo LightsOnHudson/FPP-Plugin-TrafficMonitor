@@ -92,9 +92,12 @@ showUniqueVisits();
 
 <?
 if($CAPTURE_RUNNING) {
-	echo "<input type=\submit\" name=\"KILL_CAPTURE\" value=\"STOP CAPTURE\"> \n";
+	echo "<input type=\"submit\" name=\"KILL_CAPTURE\" value=\"STOP CAPTURE\"> \n";
+	echo "<input type=\"submit\" name=\"START_CAPTURE\" value=\"START CAPTURE\" disabled> \n";
 } else {
-	echo "<input enabled type=\submit\" name=\"KILL_CAPTURE\" value=\"STOP CAPTURE\"> \n";
+	echo "<input enabled type=\submit\" name=\"KILL_CAPTURE\" value=\"STOP CAPTURE\" disabled> \n";
+	echo "<input type=\"submit\" name=\"START_CAPTURE\" value=\"START CAPTURE\" > \n";
+	
 }
 echo "<p/> \n";
 
