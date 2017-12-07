@@ -57,6 +57,8 @@ switch($CAPTURE_CMD) {
 		
 		$output = shell_exec($CMD);
 		
+		logEntr("output: ".$output);
+		
 		//array of items back separate by \n
 		$OUTPUT_ARRAY = explode("\n",$output);
 		
