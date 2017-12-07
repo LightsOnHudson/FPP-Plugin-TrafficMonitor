@@ -53,6 +53,7 @@ switch($CAPTURE_CMD) {
 		$CMD = "/usr/bin/pgrep -fl ".$CAPTURE_TO_DB_CMD;
 		logEntry("Getting pids to kill");
 		
+		logEntry("Get cmd: ".$CMD);
 		
 		$output = shell_exec($CMD);
 		
