@@ -110,6 +110,22 @@ switch($CAPTURE_CMD) {
 			
 			sleep(1);
 		break;
+		
+		
+	case "START":
+		
+		if($DEBUG) {
+			logEntry("Start capture");
+		}
+		
+		$CMD_TO_CAPTURE = "/usr/bin/sudo screen /home/fpp/media/plugins/TrafficMonitor/".$CAPTURE_TO_DB_CMD;
+		exec($CMD_TO_CAPTURE);
+		
+		sleep(1);
+		break;
+		
+		
+		
 }
 
 
@@ -173,10 +189,10 @@ showUniqueVisits();
 <?
 if($CAPTURE_RUNNING) {
 	echo "<input type=\"submit\" name=\"CAPTURE\" value=\"STOP\"> \n";
-	echo "<input type=\"submit\" name=\"START_CAPTURE\" value=\"START CAPTURE\" disabled> \n";
+	echo "<input type=\"submit\" name=\"CAPTURE\" value=\"START CAPTURE\" disabled> \n";
 } else {
-	echo "<input type=\submit\" name=\"KILL_CAPTURE\" value=\"STOP CAPTURE\" disabled> \n";
-	echo "<input type=\"submit\" name=\"START_CAPTURE\" value=\"START CAPTURE\" > \n";
+	echo "<input type=\submit\" name=\"CAPTURE\" value=\"STOP\" disabled> \n";
+	echo "<input type=\"submit\" name=\"CAPTURE\" value=\"START\" > \n";
 	
 }
 echo "<p/> \n";
