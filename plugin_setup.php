@@ -89,7 +89,9 @@ switch($CAPTURE_CMD) {
 				//logEntry("output pid: ".$pid);
 				
 				//now explode each one by a space and get the pid number
-				$PID_PARTS = preg_split('/\s\s+/', trim($pid));
+				$PID_PARTS = preg_split("/[\s]+/", trim($pid));
+				logEntry("part o: ".$PID_PARTS[0]);
+				logEntry("part 1: ".$PID_PARTS[1]);
 				$PID_TO_KILL = $PID_PARTS[0];
 				
 				//cmd to kill
