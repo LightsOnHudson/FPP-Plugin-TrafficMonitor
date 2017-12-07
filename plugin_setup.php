@@ -118,12 +118,12 @@ switch($CAPTURE_CMD) {
 			logEntry("Start capture");
 		}
 		
-		$CMD_TO_CAPTURE = "/usr/bin/sudo /home/fpp/media/plugins/TrafficMonitor/".$CAPTURE_TO_DB_CMD ." &";
+		$CMD_TO_CAPTURE = "/usr/bin/sudo /home/fpp/media/plugins/TrafficMonitor/".$CAPTURE_TO_DB_CMD ." >/dev/null 2>/dev/null &";
 		
 		if($DEBUG) {
 			logEntry("CMD to start: ".$CMD_TO_CAPTURE);
 		}
-		exec($CMD_TO_CAPTURE);
+		shell_exec($CMD_TO_CAPTURE);
 		
 		sleep(1);
 		break;
