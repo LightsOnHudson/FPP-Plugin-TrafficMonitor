@@ -51,6 +51,8 @@ switch($CAPTURE_CMD) {
 		
 		//kill the capture
 		$CMD = "/usr/bin/pgrep -fl ".$CAPTURE_TO_DB_CMD;
+		logEntry("Getting pids to kill");
+		
 		
 		$output = shell_exec($CMD);
 		
@@ -60,9 +62,9 @@ switch($CAPTURE_CMD) {
 		//there is a rogue sh command and an empty that strip off
 		//so if it is > 0 then we have it running!
 		
-		if($DEBUG)
+		if($DEBUG) {
 			logEntry("KILLING PIDS");
-			
+		}
 			foreach ($OUTPUT_ARRAY as $pid) {
 				
 				
