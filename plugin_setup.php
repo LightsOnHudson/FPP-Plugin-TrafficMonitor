@@ -231,7 +231,7 @@ echo "<p/> \n";
 echo "DEBUG: ";
 
 
-PrintSettingCheckbox("DEBUG", "DEBUG", $restart = 0, $reboot = 0, "true", "false", $pluginName = $pluginName, $callbackName = "");
+PrintSettingCheckbox("DEBUG", "DEBUG", $restart = 0, $reboot = 0, "ON", "OFF", $pluginName = $pluginName, $callbackName = "");
 ?>
 
 </fieldset>
