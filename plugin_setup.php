@@ -45,44 +45,51 @@ if(isset($_POST['CAPTURE'])) {
 	logEntry("Capture type: ".$CAPTURE_CMD);
 }
 
-if($CAPTURE_CMD === "STOP"){
-
-	//kill the capture
-	$CMD = "/usr/bin/pgrep -fl ".$CAPTURE_TO_DB_CMD;
+switch($CAPTURE_CMD) {
 	
-	$output = shell_exec($CMD);
-	
-	//array of items back separate by \n
-	$OUTPUT_ARRAY = explode("\n",$output);
-	
-	//there is a rogue sh command and an empty that strip off
-	//so if it is > 0 then we have it running!
-	
-	if($DEBUG) 
-		logEntry("KILLING PIDS");
-
-		foreach ($OUTPUT_ARRAY as $pid) {
+	case "STOP":
+		
+		//kill the capture
+		$CMD = "/usr/bin/pgrep -fl ".$CAPTURE_TO_DB_CMD;
+		
+		$output = shell_exec($CMD);
+		
+		//array of items back separate by \n
+		$OUTPUT_ARRAY = explode("\n",$output);
+		
+		//there is a rogue sh command and an empty that strip off
+		//so if it is > 0 then we have it running!
+		
+		if($DEBUG)
+			logEntry("KILLING PIDS");
 			
-			
-			logEntry("output pid: ".$pid);
-			
-			//now explode each one by a space and get the pid number
-			$PID_PARTS = explode(" ",trim($pid));
-			$PID_TO_KILL = $PID_PARTS[0];
-			
-			//cmd to kill
-			$CMD_TO_KILL = "/usr/bin/pkill ".$PID_TO_KILL;
-			exec($CMD_TO_KILL);
-			
-			if($DEBUG) {
-				logEntry(" Killing PID: ".$PID_TO_KILL);
+			foreach ($OUTPUT_ARRAY as $pid) {
+				
+				
+				logEntry("output pid: ".$pid);
+				
+				//now explode each one by a space and get the pid number
+				$PID_PARTS = explode(" ",trim($pid));
+				$PID_TO_KILL = $PID_PARTS[0];
+				
+				//cmd to kill
+				$CMD_TO_KILL = "/usr/bin/pkill ".$PID_TO_KILL;
+				exec($CMD_TO_KILL);
+				
+				if($DEBUG) {
+					logEntry(" Killing PID: ".$PID_TO_KILL);
+				}
+				
 			}
 			
-		}
-		
-		sleep(1);
-	
+			sleep(1);
+		break;
 }
+
+
+
+	
+
 
 
 WriteSettingToFile("DEBUG",urlencode("true"),$pluginName);
