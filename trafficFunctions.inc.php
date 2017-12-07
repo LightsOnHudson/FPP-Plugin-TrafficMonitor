@@ -74,7 +74,7 @@ global $DB_NAME, $DEBUG;
 			echo "</table> \n";
 			
 			echo "<p/> \n";
-			echo "<b> Total count: ".$UNIQUE_COUNT-1;
+			echo "<b> Total count: ".$UNIQUE_COUNT - 1;
 			echo "</b> \n";
 		}
 					
