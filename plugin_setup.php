@@ -38,8 +38,11 @@ if(isset($_POST['submit'])){
 	
 	
 	//WriteSettingToFile("DEBUG",urlencode($_POST["DEBUG"]),$pluginName);
-
-if($_POST['KILL_CAPTURE'] == "STOP CAPTURE"){
+if(isset($_POST['CAPTURE'])) {
+	logEntry("CAPTURE TYPE BUTTON PUSHED");
+	
+}
+if($_POST['CAPTURE'] == "STOP"){
 
 	//kill the capture
 	$CMD = "/usr/bin/pgrep -fl ".$CAPTURE_TO_DB_CMD;
@@ -133,10 +136,10 @@ showUniqueVisits();
 
 <?
 if($CAPTURE_RUNNING) {
-	echo "<input type=\"submit\" name=\"KILL_CAPTURE\" value=\"STOP CAPTURE\"> \n";
+	echo "<input type=\"submit\" name=\"CAPTURE\" value=\"STOP\"> \n";
 	echo "<input type=\"submit\" name=\"START_CAPTURE\" value=\"START CAPTURE\" disabled> \n";
 } else {
-	echo "<input enabled type=\submit\" name=\"KILL_CAPTURE\" value=\"STOP CAPTURE\" disabled> \n";
+	echo "<input type=\submit\" name=\"KILL_CAPTURE\" value=\"STOP CAPTURE\" disabled> \n";
 	echo "<input type=\"submit\" name=\"START_CAPTURE\" value=\"START CAPTURE\" > \n";
 	
 }
