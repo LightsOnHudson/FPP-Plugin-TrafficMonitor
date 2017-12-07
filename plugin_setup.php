@@ -41,6 +41,8 @@ if(isset($_POST['submit'])){
 if(isset($_POST['CAPTURE'])) {
 	logEntry("CAPTURE TYPE BUTTON PUSHED");
 	$CAPTURE_CMD = trim(strtoupper($_POST['CAPTURE']));	
+	
+	logEntry("Capture type: ".$CAPTURE_CMD);
 }
 
 if($CAPTURE_CMD === "STOP"){
