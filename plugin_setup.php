@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
 	
 	//WriteSettingToFile("DEBUG",urlencode($_POST["DEBUG"]),$pluginName);
 
-if(isset($_POST['KILL_CAPTURE'])){
+if($_POST['KILL_CAPTURE'] == "STOP CAPTURE"){
 
 	//kill the capture
 	$CMD = "/usr/bin/pgrep -fl ".$CAPTURE_TO_DB_CMD;
@@ -73,6 +73,8 @@ if(isset($_POST['KILL_CAPTURE'])){
 			}
 			
 		}
+		
+		sleep(1);
 	
 }
 
