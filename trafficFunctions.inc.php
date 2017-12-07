@@ -28,7 +28,7 @@ global $DB_NAME, $DEBUG;
 			global $DB_NAME, $DEBUG;
 			$db = new SQLite3($DB_NAME) or die("Unable to open ".$pluginName." database");
 			
-			
+			$UNIQUE_COUNT = 0;
 			
 			$uniqueVisitQuery = "SELECT FirstSeen, LastSeen,MAC, Pings,
 		Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1 AS Mins, 1.0 * Pings / (Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) + 1) AS PingsPerMin
@@ -67,11 +67,15 @@ global $DB_NAME, $DEBUG;
 				echo $row['PingsPerMin'];
 				echo "</td> \n";
 				echo "</tr> \n";
-				
+				$UNIQUE_COUNT++;
 				
 				
 			}
 			echo "</table> \n";
+			
+			echo "<p/> \n";
+			echo "<b> Total count: ".$UNIQUE_COUNT-1;
+			echo "</b> \n";
 		}
 					
 ?>
