@@ -68,20 +68,21 @@ switch($CAPTURE_CMD) {
 			foreach ($OUTPUT_ARRAY as $pid) {
 				
 				
-				logEntry("output pid: ".$pid);
+				//logEntry("output pid: ".$pid);
 				
 				//now explode each one by a space and get the pid number
 				$PID_PARTS = explode(" ",trim($pid));
 				$PID_TO_KILL = $PID_PARTS[0];
 				
 				//cmd to kill
-				$CMD_TO_KILL = "/usr/bin/pkill ".$PID_TO_KILL;
-				exec($CMD_TO_KILL);
+				$CMD_TO_KILL = "/usr/bin/sudo /usr/bin/pkill ".$PID_TO_KILL;
+				
 				
 				if($DEBUG) {
 					logEntry(" Killing PID: ".$PID_TO_KILL);
 				}
 				
+				exec($CMD_TO_KILL);
 			}
 			
 			sleep(1);
