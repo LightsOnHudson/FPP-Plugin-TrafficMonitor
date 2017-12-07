@@ -23,6 +23,21 @@ $gitURL = "https://github.com/LightsOnHudson/FPP-Plugin-TrafficMonitor.git";
 
 logEntry("plugin update file: ".$pluginUpdateFile);
 
+
+$pluginConfigFile = $settings['configDirectory'] . "/plugin." .$pluginName;
+if (file_exists($pluginConfigFile))
+	$pluginSettings = parse_ini_file($pluginConfigFile);
+	
+	$DEBUG = urldecode($pluginSettings['DEBUG']);
+	
+	$DB_NAME = urldecode($pluginSettings['DB_NAME']);
+	//	$PLUGINS = urldecode(ReadSettingFromFile("PLUGINS",$pluginName));
+	//$PLUGINS = $pluginSettings['PLUGINS'];
+	
+	if($DEBUG) {
+		print_r($_POST);
+	}
+	
 if(isset($_POST['updatePlugin']))
 {
 	logEntry("updating plugin...");
@@ -67,9 +82,7 @@ switch($CAPTURE_CMD) {
 		//there is a rogue sh command and an empty that strip off
 		//so if it is > 0 then we have it running!
 		
-		if($DEBUG) {
-			logEntry("KILLING PIDS");
-		}
+	
 			foreach ($OUTPUT_ARRAY as $pid) {
 				
 				
