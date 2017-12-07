@@ -41,15 +41,37 @@ global $DB_NAME, $DEBUG;
 			}
 			$uniqueVisitResult = $db->query($uniqueVisitQuery) or die('Query failed');
 			
+			echo "<table border=\"1\"> \n";
+			echo "<tr> \n";
+			
 			while ($row = $uniqueVisitResult->fetchArray()) {
 				
 				
 				
-				echo $row['FirstSeen']."\t".$row['LastSeen']."\t".$row['MAC']."\t".$row['Pings']."\t".$row['Mins']."\t".$row['PingsPerMin'];
+				echo "<td> \n";
+				echo $row['FirstSeen'];
+				echo "</td> \n";
+				echo "<td> \n";
+				echo $row['LastSeen'];
+				echo "</td> \n";
+				echo "<td> \n";
+				echo $row['MAC'];
+				echo "</td> \n";
+				echo "<td> \n";
+				echo $row['Pings'];
+				echo "</td> \n";
+				echo "<td> \n";
+				echo $row['Mins'];
+				echo "</td> \n";
+				echo "<td> \n";
+				echo $row['PingsPerMin'];
+				echo "</td> \n";
+				echo "</tr> \n";
 				
-				echo "<br/> \n";
+				
 				
 			}
+			echo "</table> \n";
 		}
 					
 ?>
