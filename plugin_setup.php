@@ -40,9 +40,10 @@ if(isset($_POST['submit'])){
 	//WriteSettingToFile("DEBUG",urlencode($_POST["DEBUG"]),$pluginName);
 if(isset($_POST['CAPTURE'])) {
 	logEntry("CAPTURE TYPE BUTTON PUSHED");
-	
+	$CAPTURE_CMD = trim(strtoupper($_POST['CAPTURE']));	
 }
-if($_POST['CAPTURE'] == "STOP"){
+
+if($CAPTURE_CMD === "STOP"){
 
 	//kill the capture
 	$CMD = "/usr/bin/pgrep -fl ".$CAPTURE_TO_DB_CMD;
