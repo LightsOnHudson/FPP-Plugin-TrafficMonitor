@@ -11,7 +11,10 @@ function isCaptureRunning() {
 	//array of items back separate by \n
 	$OUTPUT_ARRAY = explode("\n",$output);
 	
-	$OUTPUT_COUNT = count($OUTPUT_ARRAY)-1;
+	//there is a rogue sh command and an empty that strip off
+	//so if it is > 0 then we have it running!
+	
+	$OUTPUT_COUNT = count($OUTPUT_ARRAY)-2;
 	
 	echo "OUTPUT COUNT: ".$OUTPUT_COUNT. " ";
 	
@@ -22,6 +25,12 @@ function isCaptureRunning() {
 		}
 	}
 	
+	if($OUTPUT_COUNT > 0) {
+		echo "RUNNING \n";
+	} else {
+		echo "NOT RUNNING \n";
+	}
+	echo "<br/> \n";
 	
 }
 function showMACWhitelist() {
