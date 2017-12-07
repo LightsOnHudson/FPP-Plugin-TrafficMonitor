@@ -76,8 +76,8 @@ if (file_exists($pluginConfigFile))
 </ul>
 
 <?
-
-echo "Is output running: count: ".isCaptureRunning();
+$CAPTURE_RUNNING = isCaptureRunning();
+echo "Is output running: count: ".$CAPTURE_RUNNING;
 echo "<p/> \n";
 //show the mac whitlist
 showMACWhitelist();
@@ -91,7 +91,14 @@ showUniqueVisits();
 
 
 <?
-echo "<input type=\"hidden\" name=\"LAST_READ\" value=\"".$LAST_READ."\"> \n";
+if($CAPTURE_RUNNING) {
+	echo "<input type=\submit\" name=\"KILL_CAPTURE\" value=\"STOP CAPTURE\"> \n";
+} else {
+	echo "<input enabled type=\submit\" name=\"KILL_CAPTURE\" value=\"STOP CAPTURE\"> \n";
+}
+echo "<p/> \n";
+
+
 $restart=0;
 $reboot=0;
 

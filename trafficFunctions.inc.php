@@ -27,10 +27,14 @@ function isCaptureRunning() {
 	
 	if($OUTPUT_COUNT > 0) {
 		echo "RUNNING \n";
+		return true;
 	} else {
 		echo "NOT RUNNING \n";
+		return false;
 	}
 	echo "<br/> \n";
+	
+	return false;
 	
 }
 function showMACWhitelist() {
