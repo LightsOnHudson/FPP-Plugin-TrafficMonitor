@@ -36,7 +36,7 @@ if(isset($_POST['submit']))
 	//WriteSettingToFile("OVERLAY_MODE",urlencode($_POST["OVERLAY_MODE"]),$pluginName);
 }
 
-getUniqueVisits();
+
 	
 	
 //	$PLUGINS = urldecode(ReadSettingFromFile("PLUGINS",$pluginName));
@@ -63,6 +63,11 @@ getUniqueVisits();
 <li>This plugin tracks unique viitors to your display</li>
 </ul>
 
+//show the mac whitlist
+showMACWhitelist();
+
+echo "<p/> \n";
+showUniqueVisits();
 
 
 <form method="post" action="http://<? echo $_SERVER['SERVER_ADDR'].":".$_SERVER['SERVER_PORT']?>/plugin.php?plugin=<?echo $pluginName;?>&page=plugin_setup.php">
