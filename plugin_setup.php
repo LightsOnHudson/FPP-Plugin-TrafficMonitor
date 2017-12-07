@@ -32,9 +32,9 @@ if(isset($_POST['updatePlugin']))
 }
 
 
-if(isset($_POST['submit']))
+if(isset($_POST['submit'])){
 
-{
+}
 	
 	
 	//WriteSettingToFile("DEBUG",urlencode($_POST["DEBUG"]),$pluginName);
@@ -52,10 +52,9 @@ if(isset($_POST['KILL_CAPTURE'])){
 	//there is a rogue sh command and an empty that strip off
 	//so if it is > 0 then we have it running!
 	
-if($DEBUG) 
-	logEntry("KILLING PIDS");
-	
-	//if($DEBUG) {
+	if($DEBUG) 
+		logEntry("KILLING PIDS");
+
 		foreach ($OUTPUT_ARRAY as $pid) {
 			
 			
@@ -74,8 +73,6 @@ if($DEBUG)
 			}
 			
 		}
-	//}
-	
 	
 }
 
