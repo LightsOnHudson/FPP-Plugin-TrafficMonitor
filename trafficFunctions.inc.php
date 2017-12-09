@@ -137,7 +137,7 @@ function showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR) {
 			}
 			//$TOTAL_COUNT = count($row);
 			
-			return $UNIQUE_COUNT;
+			return $UNIQUE_COUNT-1;
 			
 }
 ?>
