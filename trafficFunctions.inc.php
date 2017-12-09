@@ -123,7 +123,7 @@ function showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR) {
 			
 			$UNIQUE_COUNT = 0;
 			
-			$uniqueVisitQuery = "SELECT COUNT(DISTINCT(MAC)) FROM Visit WHERE LastSeen >= '".$START_DATE." ".$START_HOUR."' AND LastSeen <= '".$END_DATE." ".$END_HOUR."' AND Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1;";
+			$uniqueVisitQuery = "SELECT DISTINCT(MAC) FROM Visit WHERE LastSeen >= '".$START_DATE." ".$START_HOUR."' AND LastSeen <= '".$END_DATE." ".$END_HOUR."' AND Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1;";
 			
 			if($DEBUG) {
 				logEntry("Unique Visit Query: ".$uniqueVisitQuery);
@@ -133,8 +133,9 @@ function showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR) {
 			
 			
 			$row = $uniqueVisitResult->fetchArray();
+			$TOTAL_COUNT = count($row);
 			
-			return $row['count'];
+			return $TOTAL_COUNT;
 			
 }
 ?>
