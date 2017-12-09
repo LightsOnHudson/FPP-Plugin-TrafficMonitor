@@ -179,6 +179,13 @@ if (file_exists($pluginConfigFile))
 $CAPTURE_RUNNING = isCaptureRunning();
 echo "Is output running: count: ".$CAPTURE_RUNNING;
 echo "<p/> \n";
+$START_DATE = "2017-12-08";
+$START_HOUR = "17:00:00";
+$END_DATE = $START_DATE;
+$END_HOUR = "22:00:00";
+
+echo "Total visitors today: ".showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR);
+echo "<p/> \n";
 //show the mac whitlist
 showMACWhitelist();
 

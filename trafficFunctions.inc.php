@@ -115,5 +115,26 @@ global $DB_NAME, $DEBUG;
 			echo "<b> Total count: ".($UNIQUE_COUNT - 1);
 			echo "</b> \n";
 		}
-					
+			
+function showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR) {
+			
+			global $DB_NAME, $DEBUG;
+			$db = new SQLite3($DB_NAME) or die("Unable to open ".$pluginName." database");
+			
+			$UNIQUE_COUNT = 0;
+			
+			$uniqueVisitQuery = "SELECT COUNT(DISTINCT(MAC)) FROM Visit WHERE LastSeen >= '".$START_DATE." ".$START_HOUR."' AND LastSeen <= '".$END_DATE." ".$END_HOUR."' AND Cast (( JulianDay(LastSeen) - JulianDay(FirstSeen)) * 24 * 60 As Integer) >= 1;";
+			
+			if($DEBUG) {
+				logEntry("Unique Visit Query: ".$uniqueVisitQuery);
+			}
+			$uniqueVisitResult = $db->query($uniqueVisitQuery) or die('Query failed');
+			
+			
+			
+			$row = $uniqueVisitResult->fetchArray();
+			
+			return $row['count'];
+			
+}
 ?>
