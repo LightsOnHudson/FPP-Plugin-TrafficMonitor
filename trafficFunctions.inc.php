@@ -132,10 +132,12 @@ function showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR) {
 			
 			
 			
-			$row = $uniqueVisitResult->fetchArray();
-			$TOTAL_COUNT = count($row);
+			while ($row = $uniqueVisitResult->fetchArray()) {
+				$UNIQUE_COUNT++;
+			}
+			//$TOTAL_COUNT = count($row);
 			
-			return $TOTAL_COUNT;
+			return $UNIQUE_COUNT;
 			
 }
 ?>
