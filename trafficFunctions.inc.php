@@ -39,7 +39,7 @@ function isCaptureRunning() {
 }
 function showMACWhitelist() {
 
-global $DB_NAME, $DEBUG;
+global $DB_NAME, $DEBUG, $pluginName;
 	$db = new SQLite3($DB_NAME) or die("Unable to open ".$pluginName." database");
 				
 				
@@ -63,7 +63,7 @@ global $DB_NAME, $DEBUG;
 	
 		function showUniqueVisits() {
 			
-			global $DB_NAME, $DEBUG;
+			global $DB_NAME, $DEBUG, $pluginName;
 			$db = new SQLite3($DB_NAME) or die("Unable to open ".$pluginName." database");
 			
 			$UNIQUE_COUNT = 0;
@@ -118,7 +118,7 @@ global $DB_NAME, $DEBUG;
 			
 function showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR) {
 			
-			global $DB_NAME, $DEBUG;
+			global $DB_NAME, $DEBUG, $pluginName;
 			$db = new SQLite3($DB_NAME) or die("Unable to open ".$pluginName." database");
 			
 			$UNIQUE_COUNT = 0;
