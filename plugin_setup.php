@@ -176,10 +176,12 @@ if (file_exists($pluginConfigFile))
 </ul>
 
 <?
+
+echo "Start Time: ".
 $CAPTURE_RUNNING = isCaptureRunning();
 echo "Is output running: count: ".$CAPTURE_RUNNING;
 echo "<p/> \n";
-$START_DATE = "2017-12-08";
+$START_DATE = date('Y-m-d');
 $START_HOUR = "17:00:00";
 $END_DATE = $START_DATE;
 $END_HOUR = "22:00:00";
@@ -187,10 +189,11 @@ $END_HOUR = "22:00:00";
 echo "Total visitors today: ".showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR);
 echo "<p/> \n";
 //show the mac whitlist
+echo "Whitelist: <br/> \n";
 showMACWhitelist();
 
 echo "<p/> \n";
-showUniqueVisits();
+//showUniqueVisits();
 
 ?>
 
@@ -198,6 +201,14 @@ showUniqueVisits();
 
 
 <?
+echo "Start Hour: <input type=\"text\" size=\"8\" name=\"START_HOUR\" value=\"".$START_HOUR."\"> \n";
+echo "<p/> \n";
+echo "Start Date: <input type=\"text\" size=\"10\" name=\"START_DATE\" value=\"".$START_DATE."\"> \n";
+echo "<p/> \n";
+echo "End Hour: <input type=\"text\" size=\"8\" name=\"END_HOUR\" value=\"".$END_HOUR."\"> \n";
+echo "<p/> \n";
+echo "End Date: <input type=\"text\" size=\"10\" name=\"END_DATE\" value=\"".$END_DATE."\"> \n";
+echo "<p/> \n";
 if($CAPTURE_RUNNING) {
 	echo "<input type=\"submit\" name=\"CAPTURE\" value=\"STOP\"> \n";
 	echo "<input type=\"submit\" name=\"CAPTURE\" value=\"START CAPTURE\" disabled> \n";
