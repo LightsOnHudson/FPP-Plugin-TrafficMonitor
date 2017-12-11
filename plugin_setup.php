@@ -30,7 +30,7 @@ if (file_exists($pluginConfigFile))
 	
 	$DEBUG = urldecode($pluginSettings['DEBUG']);
 	
-	$DB_NAME = urldecode($pluginSettings['DB_NAME']);
+	//$DB_NAME = urldecode($pluginSettings['DB_NAME']);
 	//	$PLUGINS = urldecode(ReadSettingFromFile("PLUGINS",$pluginName));
 	//$PLUGINS = $pluginSettings['PLUGINS'];
 	
