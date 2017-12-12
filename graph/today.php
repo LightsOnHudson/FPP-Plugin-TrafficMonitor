@@ -1,5 +1,5 @@
 <?php
-include_once "../trafficFunctions.inc.php";
+//include_once "../trafficFunctions.inc.php";
 include('phpgraphlib.php');
 $graph = new PHPGraphLib(500, 450);
 $data = array("Jan" => -1324, "Feb" => -1200, "Mar" => -100, "Apr" => -1925,
