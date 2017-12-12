@@ -16,7 +16,8 @@ function isCaptureRunning() {
 	
 	$OUTPUT_COUNT = count($OUTPUT_ARRAY)-2;
 	
-	echo "OUTPUT COUNT: ".$OUTPUT_COUNT. " ";
+	if($DEBUG)
+		echo "OUTPUT COUNT: ".$OUTPUT_COUNT. " ";
 	
 	if($DEBUG) {
 		foreach ($OUTPUT_ARRAY as $pid) {
@@ -25,6 +26,7 @@ function isCaptureRunning() {
 		}
 	}
 	
+	echo "CAPTURE IS: ";
 	if($OUTPUT_COUNT > 0) {
 		echo "RUNNING \n";
 		return true;
@@ -80,10 +82,29 @@ global $DB_NAME, $DEBUG, $pluginName;
 			$uniqueVisitResult = $db->query($uniqueVisitQuery) or die('Query failed');
 			
 			echo "<table border=\"1\"> \n";
-			echo "<tr> \n";
 			
+			echo "<tr> \n";
+			echo "<td> \n";
+			echo "First seen \n";
+			echo "</td> \n";
+			echo "<td> \n";
+			echo "Last Seen \n";
+			echo "</td> \n";
+			echo "<td> \n";
+			echo "MAC Address \n";
+			echo "</td> \n";
+			echo "<td> \n";
+			echo "PINGS \n";
+			echo "</td> \n";
+			echo "<td> \n";
+			echo "MINS \n";
+			echo "</td> \n";
+			echo "<td> \n";
+			echo "Pings / Min \n";
+			echo "</td> \n";
+			echo "</tr> \n";
 			while ($row = $uniqueVisitResult->fetchArray()) {
-				
+				echo "<tr> \n";
 				
 				
 				echo "<td> \n";

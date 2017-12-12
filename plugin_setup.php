@@ -12,6 +12,10 @@ $pluginVersion ="1.0";
 
 $CAPTURE_TO_DB_CMD = "captureToDBWLAN0.py";
 
+
+//initial settings 
+$SHOW_WHITELIST = false;
+
 $DB_NAME = "/home/fpp/media/plugindata/visitorTracker.db";
 
 $logFile = $settings['logDirectory']."/".$pluginName.".log";
@@ -49,8 +53,15 @@ if(isset($_POST['updatePlugin']))
 
 if(isset($_POST['submit'])){
 
+	WriteSettingToFile("START_DATE",urlencode($_POST["START_DATE"]),$pluginName);
+	WriteSettingToFile("START_HOUR",urlencode($_POST["START_HOUR"]),$pluginName);
+	WriteSettingToFile("END_DATE",urlencode($_POST["END_HOUR"]),$pluginName);
+	WriteSettingToFile("END_HOUR",urlencode($_POST["END_HOUR"]),$pluginName);
 }
 	
+if(isset($_POST['SHOW_WHITELIST'])) {
+	$SHOW_WHITELIST = true;
+}
 	
 	//WriteSettingToFile("DEBUG",urlencode($_POST["DEBUG"]),$pluginName);
 if(isset($_POST['CAPTURE'])) {
@@ -66,18 +77,23 @@ switch($CAPTURE_CMD) {
 		
 		//kill the capture
 		$CMD = "/usr/bin/pgrep -fl ".$CAPTURE_TO_DB_CMD;
-		logEntry("Getting pids to kill");
 		
-		logEntry("Get cmd: ".$CMD);
+		if($DEBUG) {
+			logEntry("Getting pids to kill");
+			
+			logEntry("Get cmd: ".$CMD);
+		}
 		
 		$output = shell_exec($CMD);
 		
+		if($DEBUG)
 		logEntry("output: ".$output);
 		
 		//array of items back separate by \n
 		$OUTPUT_ARRAY = explode("\n",$output);
 		
-		logEntry("output array cound: ".count($OUTPUT_ARRAY));
+		if($DEBUG)
+		logEntry("output array count: ".count($OUTPUT_ARRAY));
 		
 		//there is a rogue sh command and an empty that strip off
 		//so if it is > 0 then we have it running!
@@ -90,8 +106,10 @@ switch($CAPTURE_CMD) {
 				
 				//now explode each one by a space and get the pid number
 				$PID_PARTS = preg_split("/[\s]+/", trim($pid));
-				logEntry("part o: ".$PID_PARTS[0]);
-				logEntry("part 1: ".$PID_PARTS[1]);
+				if($DEBUG) {
+					logEntry("part o: ".$PID_PARTS[0]);
+					logEntry("part 1: ".$PID_PARTS[1]);
+				}
 				$PID_TO_KILL = $PID_PARTS[0];
 				
 				//cmd to kill
@@ -149,6 +167,10 @@ if (file_exists($pluginConfigFile))
 	$DEBUG = urldecode($pluginSettings['DEBUG']);
 	
 	$DB_NAME = urldecode($pluginSettings['DB_NAME']);
+	$START_DATE = urldecode($pluginSettings['START_DATE']);
+	$START_HOUR = urldecode($pluginSettings['START_HOUR']);
+	$END_DATE = urldecode($pluginSettings['END_DATE']);
+	$END_HOUR = urldecode($pluginSettings['END_HOUR']);
 //	$PLUGINS = urldecode(ReadSettingFromFile("PLUGINS",$pluginName));
 //$PLUGINS = $pluginSettings['PLUGINS'];
 
@@ -177,20 +199,26 @@ if (file_exists($pluginConfigFile))
 
 <?
 
-echo "Start Time: ".
+//echo "Start Time: ".
 $CAPTURE_RUNNING = isCaptureRunning();
 echo "Is output running: count: ".$CAPTURE_RUNNING;
 echo "<p/> \n";
 $START_DATE = date('Y-m-d');
-$START_HOUR = "17:00:00";
-$END_DATE = $START_DATE;
-$END_HOUR = "22:00:00";
+//$START_HOUR = "17:00:00";
+if($END_DATE == "") {
+	$END_DATE = $START_DATE;
+}
+//$END_DATE = $START_DATE;
+//$END_HOUR = "22:00:00";
 
 echo "Total visitors today: ".showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR);
 echo "<p/> \n";
 //show the mac whitlist
-echo "Whitelist: <br/> \n";
-showMACWhitelist();
+if($SHOW_WHITELIST) {
+	echo "Whitelist: <br/> \n";
+	showMACWhitelist();
+	echo "<p/> \n";
+}
 
 echo "<p/> \n";
 //showUniqueVisits();
@@ -218,19 +246,19 @@ if($CAPTURE_RUNNING) {
 	
 }
 echo "<p/> \n";
-
+echo "<input type=\"submit\" name=\"SHOW_WHITELIST\" value=\"TRUE\" > \n";
 
 $restart=0;
 $reboot=0;
 
 echo "ENABLE PLUGIN: ";
 
-//if($ENABLED== 1 || $ENABLED == "on") {
-//		echo "<input type=\"checkbox\" checked name=\"ENABLED\"> \n";
+
 PrintSettingCheckbox("Matrix Message Plugin", "ENABLED", $restart = 0, $reboot = 0, "ON", "OFF", $pluginName = $pluginName, $callbackName = "");
-//	} else {
-//		echo "<input type=\"checkbox\"  name=\"ENABLED\"> \n";
-//}
+
+echo "<p/> \n";
+PrintSettingCheckbox("Matrix Message Plugin", "ENABLED", $restart = 0, $reboot = 0, "ON", "OFF", $pluginName = $pluginName, $callbackName = "");
+
 
 echo "<p/> \n";
 ?>
