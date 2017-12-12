@@ -51,7 +51,7 @@ global $DB_NAME, $DEBUG, $pluginName;
 				if($DEBUG) {
 					logEntry("MAC Whitelist Query: ".$MACWhitelistQuery);
 				}
-				$MACWhitelistResult = $db->query($MACWhitelistQuery) or die('Query failed');
+				$MACWhitelistResult = $db->query($MACWhitelistQuery) or die('Query failed, please try again');
 				
 				while ($row = $MACWhitelistResult->fetchArray()) {
 					
@@ -79,7 +79,7 @@ global $DB_NAME, $DEBUG, $pluginName;
 			if($DEBUG) {
 				logEntry("Unique Visit Query: ".$uniqueVisitQuery);
 			}
-			$uniqueVisitResult = $db->query($uniqueVisitQuery) or die('Query failed');
+			$uniqueVisitResult = $db->query($uniqueVisitQuery) or die('Query failed please try again');
 			
 			echo "<table border=\"1\"> \n";
 			
@@ -149,7 +149,7 @@ function showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR) {
 			if($DEBUG) {
 				logEntry("Unique Visit Query: ".$uniqueVisitQuery);
 			}
-			$uniqueVisitResult = $db->query($uniqueVisitQuery) or die('Query failed');
+			$uniqueVisitResult = $db->query($uniqueVisitQuery) or die('Query failed please try again');
 			
 			
 			
