@@ -53,6 +53,10 @@ global $DB_NAME, $DEBUG, $pluginName;
 				}
 				$MACWhitelistResult = $db->query($MACWhitelistQuery) or die('Query failed, please try again');
 				
+				if($MACWhitelistResult->num_rows <=0) {
+					echo "No MACS in whitelist \n";
+					return;
+				}
 				while ($row = $MACWhitelistResult->fetchArray()) {
 					
 					
@@ -63,7 +67,7 @@ global $DB_NAME, $DEBUG, $pluginName;
 					}
 		}
 	
-		function showUniqueVisits() {
+function showUniqueVisits() {
 			
 			global $DB_NAME, $DEBUG, $pluginName;
 			$db = new SQLite3($DB_NAME) or die("Unable to open ".$pluginName." database");
