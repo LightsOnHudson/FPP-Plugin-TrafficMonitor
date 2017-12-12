@@ -65,10 +65,11 @@ if(isset($_POST['SHOW_WHITELIST'])) {
 	
 	//WriteSettingToFile("DEBUG",urlencode($_POST["DEBUG"]),$pluginName);
 if(isset($_POST['CAPTURE'])) {
-	logEntry("CAPTURE TYPE BUTTON PUSHED");
+	if($DEBUG)
+		logEntry("CAPTURE TYPE BUTTON PUSHED");
 	$CAPTURE_CMD = trim(strtoupper($_POST['CAPTURE']));	
-	
-	logEntry("Capture type: ".$CAPTURE_CMD);
+	if($DEBUG)
+		logEntry("Capture type: ".$CAPTURE_CMD);
 }
 
 switch($CAPTURE_CMD) {
@@ -87,13 +88,13 @@ switch($CAPTURE_CMD) {
 		$output = shell_exec($CMD);
 		
 		if($DEBUG)
-		logEntry("output: ".$output);
+			logEntry("output: ".$output);
 		
 		//array of items back separate by \n
 		$OUTPUT_ARRAY = explode("\n",$output);
 		
 		if($DEBUG)
-		logEntry("output array count: ".count($OUTPUT_ARRAY));
+			logEntry("output array count: ".count($OUTPUT_ARRAY));
 		
 		//there is a rogue sh command and an empty that strip off
 		//so if it is > 0 then we have it running!
@@ -161,9 +162,12 @@ WriteSettingToFile("DB_NAME",urlencode($DB_NAME),$pluginName);
 sleep(1);
 
 $pluginConfigFile = $settings['configDirectory'] . "/plugin." .$pluginName;
-if (file_exists($pluginConfigFile))
+
+
+if (file_exists($pluginConfigFile)) {
+	logEntry("Reading plugin settings from : ".$pluginConfigFile);//
 	$pluginSettings = parse_ini_file($pluginConfigFile);
-	
+
 	$DEBUG = urldecode($pluginSettings['DEBUG']);
 	
 	$DB_NAME = urldecode($pluginSettings['DB_NAME']);
@@ -174,6 +178,7 @@ if (file_exists($pluginConfigFile))
 //	$PLUGINS = urldecode(ReadSettingFromFile("PLUGINS",$pluginName));
 //$PLUGINS = $pluginSettings['PLUGINS'];
 
+}
 	if($DEBUG) {
 		print_r($_POST);
 	}
