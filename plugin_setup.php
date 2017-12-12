@@ -251,8 +251,9 @@ if($CAPTURE_RUNNING) {
 	
 }
 echo "<p/> \n";
-echo "<input type=\"submit\" name=\"SHOW_WHITELIST\" value=\"TRUE\" > \n";
-
+echo "<input type=\"submit\" name=\"SHOW_WHITELIST\" value=\"SHOW WHITELIST\" > \n";
+echo "<input type=\"submit\" name=\"SHOW_VISIT_MACS\" value=\"SHOW VISITOR MACS\" > \n";
+echo "<p/> \n";
 $restart=0;
 $reboot=0;
 
@@ -282,7 +283,7 @@ echo "<p/> \n";
 echo "DEBUG: ";
 
 
-PrintSettingCheckbox("DEBUG", "DEBUG", $restart = 0, $reboot = 0, "ON", "OFF", $pluginName = $pluginName, $callbackName = "");
+PrintSettingCheckbox("DEBUG", "DEBUG", $restart = 0, $reboot = 0, "true", "", $pluginName = $pluginName, $callbackName = "");
 ?>
 
 </fieldset>
