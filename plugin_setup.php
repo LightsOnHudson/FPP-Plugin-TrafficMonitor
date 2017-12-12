@@ -6,8 +6,11 @@ include_once "functions.inc.php";
 include_once "commonFunctions.inc.php";
 include_once "trafficFunctions.inc.php";
 
+
+include_once 'version.inc';
+
 $pluginName = "TrafficMonitor";
-$pluginVersion ="1.0";
+//$pluginVersion ="1.0";
 
 
 $CAPTURE_TO_DB_CMD = "captureToDBWLAN0.py";
@@ -197,14 +200,6 @@ if (file_exists($pluginConfigFile)) {
 <fieldset>
 <legend><?php echo $pluginName." Version: ".$pluginVersion;?> Support Instructions</legend>
 
-<p>Known Issues:
-<ul>
-<li>NONE</li>
-</ul>
-<p>Configuration:
-<ul>
-<li>This plugin tracks unique viitors to your display</li>
-</ul>
 
 <?
 
