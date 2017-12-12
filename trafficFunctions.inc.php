@@ -53,7 +53,7 @@ global $DB_NAME, $DEBUG, $pluginName;
 				}
 				$MACWhitelistResult = $db->query($MACWhitelistQuery) or die('Query failed, please try again');
 				
-				if($MACWhitelistResult->num_rows <=0) {
+				if($MACWhitelistResult->num_rows == 0) {
 					echo "No MACS in whitelist \n";
 					return;
 				}
