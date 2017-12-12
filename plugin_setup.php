@@ -286,11 +286,12 @@ PrintSettingCheckbox("DEBUG", "DEBUG", $restart = 0, $reboot = 0, "true", "", $p
 echo "<p/> \n";
 //show the mac whitlist
 if($SHOW_WHITELIST) {
-	echo "Whitelist: <br/> \n";
+	echo "Whitelist: <hr/> \n";
 	showMACWhitelist();
 	echo "<p/> \n";
 }
 if($SHOW_VISIT_MACS) {
+	echo "<center> Unique Visits</center> <br/> \n";
 	showUniqueVisits();
 }
 ?>
