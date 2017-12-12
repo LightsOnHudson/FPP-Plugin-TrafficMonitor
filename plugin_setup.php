@@ -63,6 +63,10 @@ if(isset($_POST['SHOW_WHITELIST'])) {
 	$SHOW_WHITELIST = true;
 }
 	
+if(isset($_POST['SHOW_VISIT_MACS']))
+{
+	$SHOW_VISIT_MACS = true;
+}
 	//WriteSettingToFile("DEBUG",urlencode($_POST["DEBUG"]),$pluginName);
 if(isset($_POST['CAPTURE'])) {
 	if($DEBUG)
@@ -217,16 +221,10 @@ if($END_DATE == "") {
 //$END_HOUR = "22:00:00";
 
 echo "Total visitors today: ".showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR);
-echo "<p/> \n";
-//show the mac whitlist
-if($SHOW_WHITELIST) {
-	echo "Whitelist: <br/> \n";
-	showMACWhitelist();
-	echo "<p/> \n";
-}
+
 
 echo "<p/> \n";
-//showUniqueVisits();
+
 
 ?>
 
@@ -257,13 +255,6 @@ echo "<p/> \n";
 $restart=0;
 $reboot=0;
 
-echo "ENABLE PLUGIN: ";
-
-
-PrintSettingCheckbox("Matrix Message Plugin", "ENABLED", $restart = 0, $reboot = 0, "ON", "OFF", $pluginName = $pluginName, $callbackName = "");
-
-echo "<p/> \n";
-PrintSettingCheckbox("Matrix Message Plugin", "ENABLED", $restart = 0, $reboot = 0, "ON", "OFF", $pluginName = $pluginName, $callbackName = "");
 
 
 echo "<p/> \n";
@@ -284,6 +275,17 @@ echo "DEBUG: ";
 
 
 PrintSettingCheckbox("DEBUG", "DEBUG", $restart = 0, $reboot = 0, "true", "", $pluginName = $pluginName, $callbackName = "");
+
+echo "<p/> \n";
+//show the mac whitlist
+if($SHOW_WHITELIST) {
+	echo "Whitelist: <br/> \n";
+	showMACWhitelist();
+	echo "<p/> \n";
+}
+if($SHOW_VISIT_MACS) {
+	showUniqueVisits();
+}
 ?>
 
 </fieldset>
