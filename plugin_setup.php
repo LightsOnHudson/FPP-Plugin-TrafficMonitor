@@ -32,8 +32,8 @@ $pluginConfigFile = $settings['configDirectory'] . "/plugin." .$pluginName;
 if (file_exists($pluginConfigFile))
 	$pluginSettings = parse_ini_file($pluginConfigFile);
 	
-	$DEBUG = urldecode($pluginSettings['DEBUG']);
-	
+	$DEBUG = $pluginSettings['DEBUG'];
+	logEntry("DEBUG  setting from file : ".$DEBUG);
 	//$DB_NAME = urldecode($pluginSettings['DB_NAME']);
 	//	$PLUGINS = urldecode(ReadSettingFromFile("PLUGINS",$pluginName));
 	//$PLUGINS = $pluginSettings['PLUGINS'];
@@ -282,7 +282,7 @@ echo "<p/> \n";
 echo "DEBUG: ";
 
 
-PrintSettingCheckbox("DEBUG", "DEBUG", $restart = 0, $reboot = 0, "true", "false", $pluginName = $pluginName, $callbackName = "");
+PrintSettingCheckbox("DEBUG", "DEBUG", $restart = 0, $reboot = 0, "ON", "OFF", $pluginName = $pluginName, $callbackName = "");
 ?>
 
 </fieldset>
