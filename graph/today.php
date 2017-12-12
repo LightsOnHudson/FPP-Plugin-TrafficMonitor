@@ -1,7 +1,4 @@
 <?php
-include_once "/opt/fpp/www/common.php";
-include_once "../functions.inc.php";
-include_once "../commonFunctions.inc.php";
 include_once "../trafficFunctions.inc.php";
 include('phpgraphlib.php');
 $graph = new PHPGraphLib(500, 450);
