@@ -212,10 +212,18 @@ if (file_exists($pluginConfigFile)) {
 $CAPTURE_RUNNING = isCaptureRunning();
 //echo "Is output running: count: ".$CAPTURE_RUNNING;
 echo "<p/> \n";
-$START_DATE = date('Y-m-d');
+if($START_DATE == "") {	
+	$START_DATE = date('Y-m-d');
+}
 //$START_HOUR = "17:00:00";
 if($END_DATE == "") {
 	$END_DATE = $START_DATE;
+}
+if($START_HOUR == "") {
+	$START_HOUR = "17:00:00";
+}
+if($END_HOUR == "") {
+	$END_HOUR = "22:00:00";
 }
 //$END_DATE = $START_DATE;
 //$END_HOUR = "22:00:00";
@@ -232,14 +240,15 @@ echo "<p/> \n";
 
 
 <?
-echo "Start Hour: <input type=\"text\" size=\"8\" name=\"START_HOUR\" value=\"".$START_HOUR."\"> \n";
+echo "Start Hour (HH:MM:SS): <input type=\"text\" size=\"8\" name=\"START_HOUR\" value=\"".$START_HOUR."\"> \n";
 echo "<p/> \n";
-echo "Start Date: <input type=\"text\" size=\"10\" name=\"START_DATE\" value=\"".$START_DATE."\"> \n";
+echo "Start Date (YYYY-MM-DD): <input type=\"text\" size=\"10\" name=\"START_DATE\" value=\"".$START_DATE."\"> \n";
 echo "<p/> \n";
-echo "End Hour: <input type=\"text\" size=\"8\" name=\"END_HOUR\" value=\"".$END_HOUR."\"> \n";
+echo "End Hour (HH:MM:SS): <input type=\"text\" size=\"8\" name=\"END_HOUR\" value=\"".$END_HOUR."\"> \n";
 echo "<p/> \n";
-echo "End Date: <input type=\"text\" size=\"10\" name=\"END_DATE\" value=\"".$END_DATE."\"> \n";
+echo "End Date (YYYY-MM-DD): <input type=\"text\" size=\"10\" name=\"END_DATE\" value=\"".$END_DATE."\"> \n";
 echo "<p/> \n";
+
 if($CAPTURE_RUNNING) {
 	echo "<input type=\"submit\" name=\"CAPTURE\" value=\"STOP\"> \n";
 	echo "<input type=\"submit\" name=\"CAPTURE\" value=\"START CAPTURE\" disabled> \n";
@@ -248,6 +257,9 @@ if($CAPTURE_RUNNING) {
 	echo "<input type=\"submit\" name=\"CAPTURE\" value=\"START\" > \n";
 	
 }
+echo "<p/> \n";
+
+echo "<input id=\"submit_button\" name=\"submit\" type=\"submit\" class=\"buttons\" value=\"Save Config\"> \n";
 echo "<p/> \n";
 echo "<input type=\"submit\" name=\"SHOW_WHITELIST\" value=\"SHOW WHITELIST\" > \n";
 echo "<input type=\"submit\" name=\"SHOW_VISIT_MACS\" value=\"SHOW VISITOR MACS\" > \n";
@@ -258,10 +270,10 @@ $reboot=0;
 
 
 echo "<p/> \n";
-?>
-<p/>
-<input id="submit_button" name="submit" type="submit" class="buttons" value="Save Config">
-<?
+
+
+
+
  if(file_exists($pluginUpdateFile))
  {
  	//echo "updating plugin included";
