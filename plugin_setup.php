@@ -206,7 +206,7 @@ if (file_exists($pluginConfigFile)) {
 
 //echo "Start Time: ".
 $CAPTURE_RUNNING = isCaptureRunning();
-echo "Is output running: count: ".$CAPTURE_RUNNING;
+//echo "Is output running: count: ".$CAPTURE_RUNNING;
 echo "<p/> \n";
 $START_DATE = date('Y-m-d');
 //$START_HOUR = "17:00:00";
