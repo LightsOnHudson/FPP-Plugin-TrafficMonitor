@@ -225,7 +225,7 @@ if($END_HOUR == "") {
 
 echo "Total visitors today: ".showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR);
 
-echo "<img width=\"500\" height=\"500\" src=\"graph/today.php\"> \n";
+echo "<img width=\"500\" height=\"500\" src=\"today.php\"> \n";
 
 echo "<p/> \n";
 
