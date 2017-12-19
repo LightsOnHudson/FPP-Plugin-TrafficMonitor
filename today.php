@@ -14,7 +14,7 @@ $VISITS = showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR);
 $pluginName = "TrafficMonitor";
 $logFile = $settings['logDirectory']."/".$pluginName.".log";
 logEntry("Visits: ".$VISITS);
-$graph = new PHPGraphLib(500, 450);
+$graph = new PHPGraphLib(300, 300);
 $data = array("Today" => $VISITS);//, "Feb" => -1200, "Mar" => -100, "Apr" => -1925,
 //		"May" => -1444, "Jun" => -957, "Jul" => -364, "Aug" => -221,
 //		"Sep" => -1300, "Oct" => -848, "Nov" => -719, "Dec" => -114);
