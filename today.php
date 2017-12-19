@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 $START_DATE = $_GET['START_DATE'];
 $START_HOUR = $_GET['START_HOUR'];
 $END_DATE = $_GET['END_DATE'];
