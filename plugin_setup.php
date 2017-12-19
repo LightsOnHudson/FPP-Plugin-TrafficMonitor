@@ -227,7 +227,7 @@ echo "Total visitors today: ".showDayVisits($START_DATE, $START_HOUR, $END_DATE,
 
 $IMG_URL = urlencode("http://".$_SERVER['SERVER_ADDR'].":".$_SERVER['SERVER_PORT']."/plugin.php?plugin=".$pluginName."&page=today.php&nopage=1&START_DATE=".$START_DATE."&START_HOUR=".$START_HOUR."&END_DATE=".$END_DATE."&END_HOUR=".$END_HOUR);
 
-echo "<img width=\"500\" height=\"500\" src=\"".$IMG_URL."\"> \n";
+echo "<img width=\"300\" height=\"300\" src=\"".$IMG_URL."\"> \n";
 echo "<p/> \n";
 
 
