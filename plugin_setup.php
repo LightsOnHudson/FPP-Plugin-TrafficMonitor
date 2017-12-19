@@ -58,7 +58,7 @@ if(isset($_POST['submit'])){
 
 	WriteSettingToFile("START_DATE",urlencode($_POST["START_DATE"]),$pluginName);
 	WriteSettingToFile("START_HOUR",urlencode($_POST["START_HOUR"]),$pluginName);
-	WriteSettingToFile("END_DATE",urlencode($_POST["END_HOUR"]),$pluginName);
+	WriteSettingToFile("END_DATE",urlencode($_POST["END_DATE"]),$pluginName);
 	WriteSettingToFile("END_HOUR",urlencode($_POST["END_HOUR"]),$pluginName);
 }
 	
