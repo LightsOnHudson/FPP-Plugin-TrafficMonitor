@@ -3,7 +3,7 @@ $START_DATE = $_GET['START_DATE'];
 $START_HOUR = $_GET['START_HOUR'];
 $END_DATE = $_GET['END_DATE'];
 $END_HOUR = $_GET['END_HOURE'];
-include_once "../trafficFunctions.inc.php";
+include_once "trafficFunctions.inc.php";
 include('phpgraphlib.php');
 $graph = new PHPGraphLib(500, 450);
 $data = array("Today" => showDayVisits($START_DATE, $START_HOUR, $END_DATE, $END_HOUR));//, "Feb" => -1200, "Mar" => -100, "Apr" => -1925,

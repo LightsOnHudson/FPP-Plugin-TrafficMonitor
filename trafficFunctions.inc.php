@@ -1,5 +1,4 @@
 <?php
-
 function isCaptureRunning() {
 	
 	global $DB_NAME, $DEBUG, $CAPTURE_TO_DB_CMD;
